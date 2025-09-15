@@ -31,25 +31,25 @@ secrets/
 # -----------------------------------------------------------------------
 # 📊 ANALYSIS OUTPUTS & RESULTS
 # -----------------------------------------------------------------------
-# Generated reports (PDFs, images)
+# Generated reports (PDFs, images) - Results directory
 results/**/*.pdf
 results/**/*.png
 results/**/*.jpg
 results/**/*.jpeg
 
-# Simulation and analysis data files
+# Simulation and analysis data files - Results directory
 results/**/*.csv
 results/**/*.json
 results/**/*.txt
 results/**/*.md
 results/**/*.xlsx
 
-# Temporary analysis files
+# Temporary analysis files - Results directory
 results/temp/
 results/cache/
 results/scratch/
 
-# Keep directory structure but ignore contents
+# Keep directory structure but ignore contents - Results directory
 !results/
 !results/**/
 !results/README.md
@@ -57,11 +57,41 @@ results/scratch/
 !results/**/README.md
 !results/**/.gitkeep
 
+# Generated reports (PDFs, images) - Output directory
+output/**/*.pdf
+output/**/*.png
+output/**/*.jpg
+output/**/*.jpeg
+
+# Simulation and analysis data files - Output directory
+output/**/*.csv
+output/**/*.json
+output/**/*.txt
+output/**/*.md
+output/**/*.xlsx
+
+# Temporary analysis files - Output directory
+output/temp/
+output/cache/
+output/scratch/
+
+# Keep directory structure but ignore contents - Output directory
+!output/
+!output/**/
+!output/README.md
+!output/.gitkeep
+!output/**/README.md
+!output/**/.gitkeep
+
 # Logs and temporary analysis files
 *.log
 monte_carlo.log
 simulation_reports/
 stress_test_results/
+
+# Output directory - Analysis results that may contain sensitive data
+# Note: Some files may already be tracked from before this rule was added
+output/
 
 # -----------------------------------------------------------------------
 # 🐍 PYTHON
