@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# Pre-commit hook to prevent sensitive data from being committed
+# This script should be placed in .git/hooks/pre-commit and made executable
+
+echo "🔍 Running pre-commit privacy check..."
+
+# Check for birth date patterns in staged files (excluding public examples, deleted files, and config files with samples)
+birth_date_check() {
+    staged_files=$(git diff --cached --name-only --diff-filter=ACM)
+    if [ -n "$staged_files" ]; then
+        # Look for birth date patterns but exclude allowed directories and sample config files
+        files_with_dates=""
+        for file in $staged_files; do
+            # Skip files in protected/allowed directories
+            if echo "$file" | grep -q -E "(public/examples/|household_configs/)"; then
+                continue
+            fi
+            # Skip config files that are known to contain sample data
+            if echo "$file" | grep -q -E "(household_portfolio_config\.py|sample.*\.json|\.env\.template|ENVIRONMENT_SETUP\.md|.*RESULTS\.md)"; then
+                continue
+            fi
+            # Check for date patterns in remaining files
+            if [ -f "$file" ] && grep -q -E "[0-9]{1,2}[/-][0-9]{1,2}[/-](19|20)[0-9]{2}" "$file" 2>/dev/null; then
+                files_with_dates="$files_with_dates $file"
+            fi
+        done
+        
+        if [ -n "$files_with_dates" ]; then
+            echo "❌ ERROR: Birth date patterns found in staged files!"
+            echo "Birth dates should only exist in protected directories or designated sample config files"
+            echo "Files with birth dates:$files_with_dates"
+            return 1
+        fi
+    fi
+    return 0
+}
+
+# Check for real names in staged files (excluding public examples and deleted files)
+name_check() {
+    staged_files=$(git diff --cached --name-only --diff-filter=ACM)
+    if [ -n "$staged_files" ]; then
+        files_with_names=$(echo "$staged_files" | xargs grep -l -i -E "(Doug|Terri)" 2>/dev/null | grep -v "public/examples/" | grep -v "PRIVACY_SECURITY.md" | grep -v "household_configs/" | grep -v "\.env\.template" | grep -v "\.md$" | grep -v "pre-commit")
+        if [ -n "$files_with_names" ]; then
+            echo "❌ ERROR: Real names found in staged files!"
+            echo "Use Person_A, Person_B, or other anonymized names instead"
+            echo "Files with real names: $files_with_names"
+            return 1
+        fi
+    fi
+    return 0
+}
+
+# Check for large monetary amounts that might be real
+balance_check() {
+    staged_files=$(git diff --cached --name-only --diff-filter=ACM)
+    if [ -n "$staged_files" ]; then
+        files_with_balances=$(echo "$staged_files" | xargs grep -l -E "\"current_balance\":\s*[0-9]{6,}" 2>/dev/null)
+        if [ -n "$files_with_balances" ]; then
+            echo "⚠️  WARNING: Large account balances found in staged files"
+            echo "Please verify these are anonymized sample data"
+            # Ask user to confirm
+            read -p "Are these anonymized sample balances? (y/N): " confirm
+            if [[ $confirm != [yY] ]]; then
+                echo "❌ Commit cancelled - please anonymize the data"
+                return 1
+            fi
+        fi
+    fi
+    return 0
+}
+
+# Check for API keys or secrets
+secret_check() {
+    staged_files=$(git diff --cached --name-only --diff-filter=ACM)
+    if [ -n "$staged_files" ]; then
+        files_with_secrets=$(echo "$staged_files" | xargs grep -l -E "(api_key|secret_key|password|token).*['\"][A-Za-z0-9+/]{20,}" 2>/dev/null)
+        if [ -n "$files_with_secrets" ]; then
+            echo "❌ ERROR: Potential API keys or secrets found in staged files!"
+            return 1
+        fi
+    fi
+    return 0
+}
+
+# Check if household_configs files are being committed
+household_config_check() {
+    if git diff --cached --name-only | grep "household_configs/"; then
+        echo "❌ ERROR: household_configs/ files are being committed!"
+        echo "These files contain sensitive personal data and should not be in the repository"
+        return 1
+    fi
+    return 0
+}
+
+# Run all checks
+if ! birth_date_check; then exit 1; fi
+if ! name_check; then exit 1; fi
+if ! balance_check; then exit 1; fi
+if ! secret_check; then exit 1; fi
+if ! household_config_check; then exit 1; fi
+
+echo "✅ Pre-commit privacy check passed"
+exit 0

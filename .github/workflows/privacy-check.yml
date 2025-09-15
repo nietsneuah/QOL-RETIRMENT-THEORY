@@ -1,0 +1,94 @@
+name: Privacy and Sensitive Data Check
+
+on:
+  push:
+    branches: [ master, main, develop, feature/* ]
+  pull_request:
+    branches: [ master, main, develop ]
+
+jobs:
+  privacy-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Check for sensitive data patterns
+      run: |
+        echo "🔍 Scanning for sensitive data patterns..."
+        
+        # Check for birth date patterns (MM/DD/YYYY or MM-DD-YYYY) outside of allowed directories
+        # Exclude household_configs, public/examples, and known sample config files
+        if grep -r --include="*.py" --include="*.json" --include="*.md" --include="*.txt" \
+               --exclude-dir="household_configs" --exclude-dir="public/examples" \
+               --exclude="*household_portfolio_config.py" --exclude="*sample*.json" \
+               -E "[0-9]{1,2}[/-][0-9]{1,2}[/-](19|20)[0-9]{2}" . ; then
+          echo "❌ ERROR: Found potential birth date patterns!"
+          echo "Birth dates should only exist in protected household_configs/ or public/examples/ directories"
+          echo "Or in designated sample configuration files"
+          exit 1
+        fi
+        
+        # Check for real names (Doug, Terri) - case insensitive, excluding documentation and sample configs
+        if grep -r --include="*.py" --include="*.json" \
+               --exclude-dir="household_configs" --exclude-dir="public/examples" \
+               --exclude="PRIVACY_SECURITY.md" --exclude="CI_PRIVACY_IMPLEMENTATION.md" \
+               --exclude="*household_portfolio_config.py" --exclude="*.sh" \
+               -i -E "(Doug|Terri)" . ; then
+          echo "❌ ERROR: Found real names in files!"
+          echo "Real names should only exist in protected household_configs/ directory or designated sample files"
+          exit 1
+        fi
+        
+        # Check for Social Security numbers (XXX-XX-XXXX pattern)
+        if grep -r --include="*.py" --include="*.json" --include="*.md" --include="*.txt" \
+               -E "[0-9]{3}-[0-9]{2}-[0-9]{4}" . ; then
+          echo "❌ ERROR: Found potential Social Security numbers!"
+          exit 1
+        fi
+        
+        # Check for large monetary amounts that might be real balances
+        if grep -r --include="*.py" --include="*.json" --include="*.md" --include="*.txt" \
+               -E "\"current_balance\":\s*[0-9]{6,}" . ; then
+          echo "⚠️  WARNING: Found large account balances - verify these are anonymized"
+          # Don't fail on this, just warn
+        fi
+        
+        # Check for API keys or secrets
+        if grep -r --include="*.py" --include="*.json" --include="*.md" --include="*.txt" \
+               -E "(api_key|secret_key|password|token).*['\"][A-Za-z0-9+/]{20,}" . ; then
+          echo "❌ ERROR: Found potential API keys or secrets!"
+          exit 1
+        fi
+        
+        echo "✅ Privacy check passed - no sensitive data detected"
+    
+    - name: Verify protected directories are ignored
+      run: |
+        echo "🔍 Verifying .gitignore protection..."
+        
+        # Check that household_configs/ is in .gitignore
+        if ! grep -q "household_configs/" .gitignore; then
+          echo "❌ ERROR: household_configs/ not found in .gitignore!"
+          exit 1
+        fi
+        
+        # Check that common sensitive patterns are ignored
+        if ! grep -q "\.env" .gitignore; then
+          echo "⚠️  WARNING: .env files not in .gitignore"
+        fi
+        
+        echo "✅ .gitignore protection verified"
+    
+    - name: Check for household_configs in git tracking
+      run: |
+        echo "🔍 Checking if household_configs/ is accidentally tracked..."
+        
+        # This should return empty - if it finds files, they're tracked
+        if git ls-files | grep "household_configs/"; then
+          echo "❌ ERROR: household_configs/ files are being tracked by git!"
+          echo "These files contain sensitive data and should not be in the repository"
+          exit 1
+        fi
+        
+        echo "✅ No household_configs/ files are tracked by git"

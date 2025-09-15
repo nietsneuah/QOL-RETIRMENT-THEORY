@@ -1,0 +1,2 @@
+Scenario,Starting Portfolio,Starting Age,Horizon (Years),Depletion Risk (%),Survival Rate (%),Survival at 90 (%),Final Value Mean ($),Final Value Median ($),Mean Depletion Age,5% Worst Case Age
+Traditional 4% Rule Baseline,1000000,65,30,0.0,100.0,100.0,2609185,1868515,N/A,N/A

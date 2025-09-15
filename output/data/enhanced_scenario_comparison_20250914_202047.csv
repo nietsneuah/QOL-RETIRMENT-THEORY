@@ -1,0 +1,2 @@
+Scenario,Starting Portfolio,Starting Age,Horizon (Years),Depletion Risk (%),Survival Rate (%),Survival at 90 (%),Final Value Mean ($),Final Value Median ($),Mean Depletion Age,5% Worst Case Age
+Early Bear Market Sequence Risk,1000000,65,30,0.0,100.0,100.0,2751470,1269193,N/A,N/A

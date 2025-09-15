@@ -1,0 +1,5 @@
+Scenario,Starting Portfolio,Starting Age,Horizon (Years),QOL Success Rate,Traditional Success Rate,QOL Median Final Value,Traditional Median Final Value,Utility Improvement,QOL Mean Utility,Traditional Mean Utility
+Conservative_500K,"$500,000",65,30,100.0%,100.0%,"$481,105","$562,146",8.9%,"323,526","293,821"
+Moderate_750K,"$750,000",65,35,100.0%,100.0%,"$778,869","$892,266",9.5%,"502,306","456,901"
+Aggressive_1M,"$1,000,000",62,38,100.0%,100.0%,"$997,415","$1,197,771",7.5%,"742,720","686,801"
+Late_Retirement_600K,"$600,000",70,25,100.0%,100.0%,"$631,295","$655,714",10.4%,"292,189","264,375"

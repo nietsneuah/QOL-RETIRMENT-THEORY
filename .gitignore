@@ -1,0 +1,184 @@
+# =============================================================================
+# PORTFOLIO ANALYSIS - PRIVACY-FIRST .GITIGNORE
+# =============================================================================
+
+# -----------------------------------------------------------------------
+# 🔒 CRITICAL: PERSONAL DATA PROTECTION
+# -----------------------------------------------------------------------
+# Environment configuration (contains real portfolio data)
+.env
+.env.*
+.env.local
+.env.production
+.env.development
+.env.test
+!.env.template
+
+# Portfolio data files
+*portfolio*.csv
+Portfolio_Positions_*.csv
+*.personal.json
+*_actual_*.json
+*_real_*.json
+
+# API Keys and credentials
+*.key
+*.secret
+*.pem
+api_keys/
+secrets/
+
+# -----------------------------------------------------------------------
+# 📊 ANALYSIS OUTPUTS & RESULTS
+# -----------------------------------------------------------------------
+# Generated reports (PDFs, images)
+results/**/*.pdf
+results/**/*.png
+results/**/*.jpg
+results/**/*.jpeg
+
+# Simulation and analysis data files
+results/**/*.csv
+results/**/*.json
+results/**/*.txt
+results/**/*.md
+results/**/*.xlsx
+
+# Temporary analysis files
+results/temp/
+results/cache/
+results/scratch/
+
+# Keep directory structure but ignore contents
+!results/
+!results/**/
+!results/README.md
+!results/.gitkeep
+!results/**/README.md
+!results/**/.gitkeep
+
+# Logs and temporary analysis files
+*.log
+monte_carlo.log
+simulation_reports/
+stress_test_results/
+
+# -----------------------------------------------------------------------
+# 🐍 PYTHON
+# -----------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+conda-meta/
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# -----------------------------------------------------------------------
+# 💻 DEVELOPMENT TOOLS & IDE FILES
+# -----------------------------------------------------------------------
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Roo/Cline IDE files
+.roo/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+profile_default/
+ipython_config.py
+
+# -----------------------------------------------------------------------
+# 🗂️ SYSTEM FILES
+# -----------------------------------------------------------------------
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+backup_*/
+*_backup_*
+
+# -----------------------------------------------------------------------
+# 📁 LEGACY/CLEANUP
+# -----------------------------------------------------------------------
+# Old directory structures (cleaned up)
+household_configs/
+portfolio_configs/
+results_backup_*
+simulation_reports/
+stress_test_results/
+
+# =============================================================================
+# END .GITIGNORE
+# =============================================================================
+# Financial Data Privacy
+imports/*.csv
+imports/*_analysis.json
+imports/portfolio_*.md
+imports/additional_assets.json
+
+# Private financial documentation directory
+private/
+private/**/*
