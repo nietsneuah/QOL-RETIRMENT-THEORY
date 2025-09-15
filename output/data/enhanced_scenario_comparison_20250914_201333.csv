@@ -1,2 +1,0 @@
-Scenario,Starting Portfolio,Starting Age,Horizon (Years),Depletion Risk (%),Survival Rate (%),Survival at 90 (%),Final Value Mean ($),Final Value Median ($),Mean Depletion Age,5% Worst Case Age
-Extreme Depletion Test (Designed to Fail),200000,45,50,7.7,92.3,93.1,3884967,24693,70.4,48
