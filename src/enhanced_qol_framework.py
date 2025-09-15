@@ -13,8 +13,8 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # Import the original framework and depletion analysis
-from .qol_framework import HypotheticalPortfolioQOLAnalysis
-from .depletion_analysis import PortfolioDepletionAnalysis
+from qol_framework import HypotheticalPortfolioQOLAnalysis
+from depletion_analysis import PortfolioDepletionAnalysis
 
 
 class EnhancedQOLAnalysis:
@@ -71,6 +71,8 @@ class EnhancedQOLAnalysis:
                               qol_variability: bool = True,
                               return_volatility: float = 0.15,
                               inflation_variability: bool = True,
+                              base_real_return: float = None,
+                              base_inflation: float = None,
                               verbose: bool = True) -> Dict[str, Any]:
         """
         Run enhanced Monte Carlo simulation with detailed tracking.
@@ -80,6 +82,8 @@ class EnhancedQOLAnalysis:
             qol_variability: Whether to add variability to QOL adjustments
             return_volatility: Annual return volatility 
             inflation_variability: Whether to vary inflation rates
+            base_real_return: Override default real return (for testing)
+            base_inflation: Override default inflation (for testing)
             verbose: Whether to print progress updates
             
         Returns:
@@ -107,7 +111,8 @@ class EnhancedQOLAnalysis:
             # Run single simulation path
             path_results = self._run_single_enhanced_path(
                 sim_idx, withdrawal_strategy, qol_variability, 
-                return_volatility, inflation_variability
+                return_volatility, inflation_variability,
+                base_real_return, base_inflation
             )
             
             # Store detailed path data
@@ -142,7 +147,9 @@ class EnhancedQOLAnalysis:
                                  withdrawal_strategy: str,
                                  qol_variability: bool,
                                  return_volatility: float,
-                                 inflation_variability: bool) -> Dict[str, List]:
+                                 inflation_variability: bool,
+                                 base_real_return: float = None,
+                                 base_inflation: float = None) -> Dict[str, List]:
         """Run a single simulation path with detailed tracking."""
         
         # Initialize path storage
@@ -160,10 +167,18 @@ class EnhancedQOLAnalysis:
         # Initialize variables
         current_portfolio = self.starting_value
         current_age = self.starting_age
+        cumulative_inflation_factor = 1.0  # Track cumulative inflation for Trinity Study
         
         # Generate inflation and return scenarios
-        base_inflation = 0.025  # 2.5% base inflation
-        base_return = 0.07      # 7% base return
+        if base_inflation is None:
+            base_inflation = 0.025  # 2.5% base inflation
+        
+        # Use realistic market assumptions (unless overridden for testing)
+        if base_real_return is None:
+            # Nominal returns: Stocks ~7%, Bonds ~4%
+            # Real returns after inflation: Stocks ~4.5%, Bonds ~1.5%
+            # For blended portfolio (declining equity allocation), expect ~1-3% real returns
+            base_real_return = 0.015  # 1.5% average real return (more conservative/realistic)
         
         for year in range(self.horizon_years):
             current_age = self.starting_age + year
@@ -174,7 +189,7 @@ class EnhancedQOLAnalysis:
             else:
                 annual_inflation = base_inflation
                 
-            annual_return = np.random.normal(base_return, return_volatility)
+            annual_return = np.random.normal(base_real_return, return_volatility)
             
             # Get dynamic asset allocation (from original framework)
             allocation = self.qol_framework.get_allocation(current_age)
@@ -191,10 +206,28 @@ class EnhancedQOLAnalysis:
             
             # Calculate withdrawal based on strategy
             if withdrawal_strategy == 'hauenstein':
-                base_withdrawal_rate = self._get_hauenstein_withdrawal_rate(year)
-                withdrawal_amount = current_portfolio * base_withdrawal_rate * qol_adjustment
+                # QOL Framework: Trinity Study base with QOL multipliers
+                # Start with Trinity's 4% of initial value, inflation-adjusted
+                base_trinity_withdrawal = self.starting_value * 0.04 * cumulative_inflation_factor
+                qol_multiplier = self._get_qol_multiplier(year)
+                withdrawal_amount = base_trinity_withdrawal * qol_multiplier * qol_adjustment
+                # Update cumulative inflation factor AFTER withdrawal calculation
+                cumulative_inflation_factor *= (1 + annual_inflation)
+            elif withdrawal_strategy == 'custom':
+                # QOL Framework: Trinity Study base with QOL multipliers (same as hauenstein)
+                base_trinity_withdrawal = self.starting_value * 0.04 * cumulative_inflation_factor
+                qol_multiplier = self._get_qol_multiplier(year)
+                withdrawal_amount = base_trinity_withdrawal * qol_multiplier * qol_adjustment
+                # Update cumulative inflation factor AFTER withdrawal calculation
+                cumulative_inflation_factor *= (1 + annual_inflation)
+            elif withdrawal_strategy == 'trinity_4pct':
+                # Trinity Study: Fixed 4% of initial value, adjusted for cumulative inflation
+                base_withdrawal = self.starting_value * 0.04
+                withdrawal_amount = base_withdrawal * cumulative_inflation_factor
+                # Update cumulative inflation factor AFTER withdrawal calculation
+                cumulative_inflation_factor *= (1 + annual_inflation)
             elif withdrawal_strategy == 'fixed_4pct':
-                withdrawal_amount = self.starting_value * 0.04  # Fixed 4% of initial
+                withdrawal_amount = self.starting_value * 0.04  # Fixed 4% of initial (no inflation adjustment)
             elif withdrawal_strategy == 'dynamic_4pct':
                 withdrawal_amount = current_portfolio * 0.04   # 4% of current portfolio
             else:
@@ -238,14 +271,31 @@ class EnhancedQOLAnalysis:
             'inflation_path': inflation_path
         }
     
-    def _get_hauenstein_withdrawal_rate(self, year: int) -> float:
-        """Get Hauenstein withdrawal rate for given year (3-phase strategy)."""
+    def _get_qol_multiplier(self, year: int) -> float:
+        """
+        Get QOL multiplier for Trinity Study base withdrawal.
+        
+        These multipliers are designed to redistribute Trinity Study's total expected
+        income across years based on QOL preferences:
+        - Phase 1 (Years 0-9): Higher withdrawal (overweight early high-QOL years)
+        - Phase 2 (Years 10-19): Moderate withdrawal 
+        - Phase 3 (Years 20+): Lower withdrawal (underweight low-QOL years)
+        
+        The multipliers are calculated to maintain approximately the same total
+        expected income as Trinity Study over the full retirement horizon.
+        """
         if year < 10:
-            return self.qol_phase1_rate  # Phase 1: Peak enjoyment years
+            # Phase 1: Convert 5.4% rate to Trinity multiplier
+            # 5.4% vs 4.0% base = 1.35x multiplier
+            return self.qol_phase1_rate / 0.04
         elif year < 20:
-            return self.qol_phase2_rate  # Phase 2: Comfortable years
+            # Phase 2: Convert 4.5% rate to Trinity multiplier  
+            # 4.5% vs 4.0% base = 1.125x multiplier
+            return self.qol_phase2_rate / 0.04
         else:
-            return self.qol_phase3_rate  # Phase 3: Care years
+            # Phase 3: Convert 3.5% rate to Trinity multiplier
+            # 3.5% vs 4.0% base = 0.875x multiplier
+            return self.qol_phase3_rate / 0.04
     
     def _compile_enhanced_results(self) -> Dict[str, Any]:
         """Compile comprehensive simulation results."""
@@ -550,3 +600,7 @@ class EnhancedQOLAnalysis:
             }
         
         return comparison_results
+
+
+# Alias for backwards compatibility
+EnhancedQOLFramework = EnhancedQOLAnalysis

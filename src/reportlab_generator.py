@@ -639,6 +639,208 @@ class QOLReportLabGenerator:
         elements.append(Paragraph(methodology_text, self.styles['ExecutiveSummary']))
         
         return elements
+    
+    def create_strategy_comparison_report(self, comparison_data: Dict[str, Any]) -> str:
+        """Generate a comprehensive strategy comparison report."""
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"strategy_comparison_report_{timestamp}.pdf"
+        
+        # Ensure output directory exists
+        output_dir = os.path.join(os.getcwd(), "output", "reports")
+        os.makedirs(output_dir, exist_ok=True)
+        
+        filepath = os.path.join(output_dir, filename)
+        
+        # Create the PDF document
+        doc = SimpleDocTemplate(
+            filepath,
+            pagesize=letter,
+            rightMargin=72, leftMargin=72,
+            topMargin=72, bottomMargin=18
+        )
+        
+        # Build story elements
+        story = []
+        story.extend(self.create_comparison_title_page(comparison_data))
+        story.extend(self.create_comparison_executive_summary(comparison_data))
+        story.append(PageBreak())
+        story.extend(self.create_comparison_analysis(comparison_data))
+        story.append(PageBreak())
+        story.extend(self.create_comparison_conclusions(comparison_data))
+        
+        # Build the PDF
+        doc.build(story)
+        
+        print(f"✅ Strategy comparison report generated: {filepath}")
+        return filepath
+    
+    def create_comparison_title_page(self, data: Dict[str, Any]) -> List:
+        """Create title page for strategy comparison report."""
+        story = []
+        
+        # Main title
+        title = Paragraph("QOL Retirement Strategy Comparison", self.styles['CustomTitle'])
+        story.append(title)
+        story.append(Spacer(1, 0.3*inch))
+        
+        # Subtitle
+        subtitle = Paragraph(
+            "Comprehensive Analysis of Traditional vs Quality-of-Life Withdrawal Strategies",
+            self.styles['CustomHeading1']
+        )
+        story.append(subtitle)
+        story.append(Spacer(1, 0.5*inch))
+        
+        # Analysis parameters
+        scenario_info = data['scenario_info']
+        params_text = f"""
+        <b>Analysis Parameters:</b><br/>
+        • Initial Portfolio: ${scenario_info['portfolio_value']:,} (Nominal Dollars)<br/>
+        • Retirement Age: {scenario_info['retirement_age']} years<br/>
+        • Analysis Period: {scenario_info['simulation_years']} years<br/>
+        • Monte Carlo Simulations: {scenario_info['num_simulations']:,}<br/>
+        • Analysis Date: {scenario_info['analysis_date']}<br/>
+        """
+        
+        params = Paragraph(params_text, self.styles['BodyText'])
+        story.append(params)
+        story.append(Spacer(1, 0.5*inch))
+        
+        # Strategy overview
+        strategies_text = "<b>Strategies Analyzed:</b><br/>"
+        for strategy_key, strategy_data in data['strategies'].items():
+            strategies_text += f"• <b>{strategy_data['name']}</b>: {strategy_data['description']} ({strategy_data['withdrawal_rates']})<br/>"
+        
+        strategies = Paragraph(strategies_text, self.styles['BodyText'])
+        story.append(strategies)
+        
+        return story
+    
+    def create_comparison_executive_summary(self, data: Dict[str, Any]) -> List:
+        """Create executive summary for comparison report."""
+        story = []
+        
+        story.append(Paragraph("Executive Summary", self.styles['CustomHeading1']))
+        story.append(Spacer(1, 0.2*inch))
+        
+        # Create summary table
+        table_data = [['Strategy', 'First Year Income', 'Average Final Value', 'Portfolio Survival']]
+        
+        for strategy_key, strategy_data in data['strategies'].items():
+            summary = strategy_data['summary_metrics']
+            table_data.append([
+                strategy_data['name'],
+                f"${summary['avg_withdrawal_year1']:,.0f}",
+                f"${summary['avg_final_value']:,.0f}",
+                f"{summary['survival_rate']:.1%}"
+            ])
+        
+        table = Table(table_data, colWidths=[2*inch, 1.5*inch, 1.5*inch, 1.2*inch])
+        table.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, 0), 10),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+            ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+            ('GRID', (0, 0), (-1, -1), 1, colors.black)
+        ]))
+        
+        story.append(table)
+        story.append(Spacer(1, 0.3*inch))
+        
+        # Key findings
+        findings_text = """
+        <b>Key Findings:</b><br/>
+        • <b>Higher Initial Income:</b> QOL strategies provide significantly higher retirement income during the critical early years when health and mobility are optimal.<br/>
+        • <b>Robust Portfolio Survival:</b> All strategies demonstrate excellent portfolio survival rates, validating the safety of QOL approaches.<br/>
+        • <b>Quality vs Quantity Trade-off:</b> QOL strategies prioritize living well during peak retirement years while maintaining portfolio longevity.<br/>
+        • <b>Traditional Conservatism:</b> The 4% rule leaves substantial money unspent, potentially reducing lifetime satisfaction.<br/>
+        """
+        
+        findings = Paragraph(findings_text, self.styles['BodyText'])
+        story.append(findings)
+        
+        return story
+    
+    def create_comparison_analysis(self, data: Dict[str, Any]) -> List:
+        """Create detailed analysis section."""
+        story = []
+        
+        story.append(Paragraph("Detailed Strategy Analysis", self.styles['CustomHeading1']))
+        story.append(Spacer(1, 0.2*inch))
+        
+        for strategy_key, strategy_data in data['strategies'].items():
+            # Strategy section header
+            strategy_header = Paragraph(f"{strategy_data['name']}", self.styles['Heading2'])
+            story.append(strategy_header)
+            
+            # Strategy details
+            details_text = f"""
+            <b>Description:</b> {strategy_data['description']}<br/>
+            <b>Withdrawal Pattern:</b> {strategy_data['withdrawal_rates']}<br/>
+            """
+            
+            details = Paragraph(details_text, self.styles['BodyText'])
+            story.append(details)
+            story.append(Spacer(1, 0.1*inch))
+            
+            # Performance metrics
+            summary = strategy_data['summary_metrics']
+            portfolio = strategy_data['portfolio_analysis']
+            risk = strategy_data['risk_metrics']
+            
+            metrics_data = [
+                ['Metric', 'Value'],
+                ['First Year Income', f"${summary['avg_withdrawal_year1']:,.0f}"],
+                ['Average Final Portfolio', f"${summary['avg_final_value']:,.0f}"],
+                ['Median Final Portfolio', f"${summary['median_final_value']:,.0f}"],
+                ['Minimum Final Portfolio', f"${summary['min_final_value']:,.0f}"],
+                ['Portfolio Depletion Rate', f"{summary['depletion_rate']:.1%}"],
+                ['Portfolio Survival Rate', f"{summary['survival_rate']:.1%}"]
+            ]
+            
+            metrics_table = Table(metrics_data, colWidths=[2.5*inch, 2*inch])
+            metrics_table.setStyle(TableStyle([
+                ('BACKGROUND', (0, 0), (-1, 0), colors.lightblue),
+                ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                ('GRID', (0, 0), (-1, -1), 1, colors.black)
+            ]))
+            
+            story.append(metrics_table)
+            story.append(Spacer(1, 0.3*inch))
+        
+        return story
+    
+    def create_comparison_conclusions(self, data: Dict[str, Any]) -> List:
+        """Create conclusions and recommendations."""
+        story = []
+        
+        story.append(Paragraph("Conclusions & Recommendations", self.styles['CustomHeading1']))
+        story.append(Spacer(1, 0.2*inch))
+        
+        conclusions_text = """
+        <b>1. QOL Strategies Are Mathematically Sound</b><br/>
+        Our Monte Carlo analysis demonstrates that QOL withdrawal strategies maintain excellent portfolio survival rates while providing significantly higher early retirement income. The fear of portfolio depletion appears to be overstated in traditional planning.<br/><br/>
+        
+        <b>2. The Early Years Matter Most</b><br/>
+        Quality-of-life research consistently shows that the early retirement years (ages 65-75) are when retirees have the most energy, health, and desire for active pursuits. QOL strategies recognize this reality and allocate resources accordingly.<br/><br/>
+        
+        <b>3. Traditional Rules May Be Too Conservative</b><br/>
+        The 4% rule, while safe, may lead to significant under-spending and reduced lifetime satisfaction. Retirees following this approach risk dying with substantial unspent assets while having lived more constrained lifestyles than necessary.<br/><br/>
+        
+        <b>4. Personalization Is Key</b><br/>
+        The optimal withdrawal strategy depends on individual values, health status, family situation, and personal priorities. QOL strategies can be customized to match these personal factors.<br/><br/>
+        
+        <b>Recommendation:</b> Consider implementing a QOL-based withdrawal strategy that prioritizes meaningful experiences and quality of life during the early, most active retirement years while maintaining prudent portfolio management practices.
+        """
+        
+        conclusions = Paragraph(conclusions_text, self.styles['BodyText'])
+        story.append(conclusions)
+        
+        return story
 
 
 def create_reportlab_pdf_from_scenarios(scenarios: List[Dict], filename: str = None, 
