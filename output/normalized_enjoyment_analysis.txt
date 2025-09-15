@@ -1,0 +1,120 @@
+================================================================================
+💰 NORMALIZED ENJOYMENT VALUE ANALYSIS REPORT
+================================================================================
+
+📋 EXECUTIVE SUMMARY
+----------------------------------------
+This analysis assigns dollar values to the 'enjoyment premium' of
+early retirement years and normalizes all comparisons to Year 1
+purchasing power for direct financial comparison.
+
+🎯 ENJOYMENT VALUE ASSUMPTIONS
+----------------------------------------
+Income received during different life phases has different value:
+• High Enjoyment (Ages 65-74): 1.5x value (active, healthy years)
+• Moderate Enjoyment (Ages 75-84): 1.2x value (semi-active years)
+• Low Enjoyment (Ages 85+): 1.0x value (baseline)
+
+Question: Would you pay $1,500 to receive income in your first
+retirement year vs. $1,000 to receive it at age 85?
+
+📊 CONSERVATIVE ENJOYMENT SCENARIO
+----------------------------------------
+Values: High=1.2x, Moderate=1.1x, Low=1.0x
+
+Raw Income Comparison:
+  • Trinity Study: $1,536,791
+  • QOL Enhanced: $1,580,605
+  • QOL Advantage: $+43,814 (+2.9%)
+
+Enjoyment-Weighted Value Comparison:
+  • Trinity Study: $1,707,619
+  • QOL Enhanced: $1,792,422
+  • QOL Advantage: $+84,803 (+5.0%)
+
+Enjoyment Premium Analysis:
+  • Trinity Premium: $170,828
+  • QOL Premium: $211,817
+  • Extra Enjoyment Value: $+40,989
+
+Risk-Adjusted Analysis:
+  • Additional Risk: 8.5 percentage points
+  • Risk Cost: $85,000 in portfolio value
+  • Risk-Adjusted Value: $1.00 per risk dollar
+  • Cost per Enjoyment Dollar: $2.07 in risk
+
+Value Assessment: 🟡 MODERATE VALUE - Consider personal preferences
+
+📊 MODERATE ENJOYMENT SCENARIO
+----------------------------------------
+Values: High=1.5x, Moderate=1.2x, Low=1.0x
+
+Raw Income Comparison:
+  • Trinity Study: $1,536,791
+  • QOL Enhanced: $1,580,605
+  • QOL Advantage: $+43,814 (+2.9%)
+
+Enjoyment-Weighted Value Comparison:
+  • Trinity Study: $1,878,447
+  • QOL Enhanced: $2,004,238
+  • QOL Advantage: $+125,792 (+6.7%)
+
+Enjoyment Premium Analysis:
+  • Trinity Premium: $341,656
+  • QOL Premium: $423,633
+  • Extra Enjoyment Value: $+81,977
+
+Risk-Adjusted Analysis:
+  • Additional Risk: 8.5 percentage points
+  • Risk Cost: $85,000 in portfolio value
+  • Risk-Adjusted Value: $1.48 per risk dollar
+  • Cost per Enjoyment Dollar: $1.04 in risk
+
+Value Assessment: 🟡 GOOD VALUE - Reasonable risk-enjoyment trade-off
+
+📊 AGGRESSIVE ENJOYMENT SCENARIO
+----------------------------------------
+Values: High=2.0x, Moderate=1.4x, Low=1.0x
+
+Raw Income Comparison:
+  • Trinity Study: $1,536,791
+  • QOL Enhanced: $1,580,605
+  • QOL Advantage: $+43,814 (+2.9%)
+
+Enjoyment-Weighted Value Comparison:
+  • Trinity Study: $2,220,103
+  • QOL Enhanced: $2,427,871
+  • QOL Advantage: $+207,769 (+9.4%)
+
+Enjoyment Premium Analysis:
+  • Trinity Premium: $683,312
+  • QOL Premium: $847,266
+  • Extra Enjoyment Value: $+163,954
+
+Risk-Adjusted Analysis:
+  • Additional Risk: 8.5 percentage points
+  • Risk Cost: $85,000 in portfolio value
+  • Risk-Adjusted Value: $2.44 per risk dollar
+  • Cost per Enjoyment Dollar: $0.52 in risk
+
+Value Assessment: 🟢 EXCELLENT VALUE - Less than $1 risk per $1 enjoyment
+
+🎯 OVERALL RECOMMENDATION
+----------------------------------------
+Based on moderate enjoyment values (1.5x/1.2x/1.0x):
+• QOL provides $81,977 extra enjoyment value
+• QOL costs $85,000 in additional portfolio risk
+• Cost: $1.04 risk per $1 enjoyment benefit
+
+FINAL RECOMMENDATION: 🟡 QOL VIABLE - Good value if you prioritize early retirement enjoyment
+
+🤔 PERSONAL DECISION FACTORS
+----------------------------------------
+The key question: How much extra would you personally pay to
+receive retirement income during your healthy, active years
+versus your later, potentially less active years?
+
+If your personal enjoyment values are:
+• Conservative (1.25x/1.1x/1.0x): QOL may not be worth it
+• Moderate (1.5x/1.2x/1.0x): QOL is a reasonable choice
+• Aggressive (2.0x/1.4x/1.0x): QOL is strongly recommended

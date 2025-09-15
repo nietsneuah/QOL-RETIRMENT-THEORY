@@ -1,0 +1,65 @@
+================================================================================
+🚀 AGGRESSIVE PORTFOLIO ANALYSIS REPORT
+================================================================================
+
+📋 EXECUTIVE SUMMARY
+----------------------------------------
+Analysis of QOL strategy viability across different portfolio allocations:
+• Conservative (30/70): 3.5% real return, 12% volatility
+• Moderate (60/40): 5.5% real return, 15% volatility
+• Aggressive (80/20): 6.8% real return, 18% volatility
+• Very Aggressive (100/0): 7.2% real return, 20% volatility
+
+🎯 KEY FINDINGS
+----------------------------------------
+
+Conservative (30/70):
+  • QOL income advantage: -0.9%
+  • Risk penalty: +11.6%
+  • Risk-adjusted advantage: -0.08
+  • 🔴 QOL NOT RECOMMENDED - Poor risk-adjusted returns
+
+Moderate (60/40):
+  • QOL income advantage: +1.6%
+  • Risk penalty: +12.2%
+  • Risk-adjusted advantage: 0.13
+  • 🔴 QOL NOT RECOMMENDED - Poor risk-adjusted returns
+
+Aggressive (80/20):
+  • QOL income advantage: +2.6%
+  • Risk penalty: +10.0%
+  • Risk-adjusted advantage: 0.26
+  • 🔴 QOL NOT RECOMMENDED - Poor risk-adjusted returns
+
+Very Aggressive (100/0):
+  • QOL income advantage: +2.9%
+  • Risk penalty: +8.5%
+  • Risk-adjusted advantage: 0.34
+  • 🔴 QOL NOT RECOMMENDED - Poor risk-adjusted returns
+
+🏆 OPTIMAL ALLOCATION FOR QOL
+----------------------------------------
+Best allocation: Very Aggressive (100/0)
+Risk-adjusted advantage: 0.34
+🔴 QOL NOT RECOMMENDED - Poor risk-adjusted returns
+
+================================================================================
+DETAILED COMPARISON TABLE
+================================================================================
+              Portfolio Real_Return Volatility         Strategy Success_Rate Avg_Final_Value Total_Withdrawals Depletion_Risk  Sharpe_Approx
+   Conservative (30/70)        3.5%      12.0%    Trinity Study        34.4%        $402,587        $1,437,838          65.6%       2.191826
+   Conservative (30/70)        3.5%      12.0% QOL Conservative        27.2%        $302,306        $1,435,731          72.8%       1.972158
+   Conservative (30/70)        3.5%      12.0%     QOL Moderate        24.1%        $265,407        $1,431,244          75.9%       1.885697
+   Conservative (30/70)        3.5%      12.0%     QOL Enhanced        22.8%        $237,071        $1,425,139          77.2%       1.846035
+       Moderate (60/40)        5.5%      15.0%    Trinity Study        56.3%      $1,482,159        $1,551,852          43.7%       3.551149
+       Moderate (60/40)        5.5%      15.0% QOL Conservative        50.4%      $1,229,721        $1,574,096          49.6%       3.173580
+       Moderate (60/40)        5.5%      15.0%     QOL Moderate        46.5%      $1,129,990        $1,577,861          53.5%       2.949272
+       Moderate (60/40)        5.5%      15.0%     QOL Enhanced        44.1%      $1,049,243        $1,576,868          55.9%       2.820873
+     Aggressive (80/20)        6.8%      18.0%    Trinity Study        62.6%      $2,868,274        $1,564,932          37.4%       4.184311
+     Aggressive (80/20)        6.8%      18.0% QOL Conservative        57.7%      $2,488,972        $1,592,934          42.3%       3.765801
+     Aggressive (80/20)        6.8%      18.0%     QOL Moderate        55.1%      $2,333,832        $1,603,465          44.9%       3.571192
+     Aggressive (80/20)        6.8%      18.0%     QOL Enhanced        52.6%      $2,205,463        $1,606,374          47.4%       3.388975
+Very Aggressive (100/0)        7.2%      20.0%    Trinity Study        60.9%      $3,526,230        $1,536,791          39.1%       3.930411
+Very Aggressive (100/0)        7.2%      20.0% QOL Conservative        56.7%      $3,103,178        $1,565,942          43.3%       3.616494
+Very Aggressive (100/0)        7.2%      20.0%     QOL Moderate        53.8%      $2,930,566        $1,576,658          46.2%       3.412679
+Very Aggressive (100/0)        7.2%      20.0%     QOL Enhanced        52.4%      $2,786,405        $1,580,605          47.6%       3.320599

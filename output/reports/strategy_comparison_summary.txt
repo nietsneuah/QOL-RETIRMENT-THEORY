@@ -1,0 +1,49 @@
+QOL RETIREMENT STRATEGY COMPARISON REPORT
+==================================================
+
+SIMULATION PARAMETERS:
+- Starting Portfolio: $1,000,000
+- Age Range: 70-99 (29 years)
+- Real Returns: 1.5% base with 15% volatility
+- Inflation: 3% base with variability
+- Monte Carlo Simulations: 1,000
+
+STRATEGY RESULTS:
+------------------------------
+
+Trinity_4pct:
+  Description: Trinity Study: Fixed $40K/year, inflation-adjusted
+  Final Value (Mean): $140,656
+  Final Value (Median): $0
+  Depletion Rate: 85.8%
+  Survival to Age 80: 75.9%
+  Total Lifetime Income: $1,166,289
+  5th Percentile Final: $0
+  95th Percentile Final: $855,251
+
+QOL_Standard:
+  Description: QOL Standard: 5.4%/4.5%/3.5% phases
+  Final Value (Mean): $443,436
+  Final Value (Median): $305,846
+  Depletion Rate: 0.0%
+  Survival to Age 80: 100.0%
+  Total Lifetime Income: $884,204
+  5th Percentile Final: $65,839
+  95th Percentile Final: $1,247,581
+
+QOL_Enhanced:
+  Description: QOL Enhanced: 7.0%/5.5%/4.0% phases
+  Final Value (Mean): $323,188
+  Final Value (Median): $220,985
+  Depletion Rate: 0.0%
+  Survival to Age 80: 100.0%
+  Total Lifetime Income: $955,785
+  5th Percentile Final: $46,481
+  95th Percentile Final: $913,829
+
+KEY INSIGHTS:
+---------------
+- Trinity Study shows 85.8% depletion rate
+- QOL Standard shows 0.0% depletion rate
+- QOL Enhanced shows 0.0% depletion rate
+- QOL Standard reduces depletion risk by 85.8% vs Trinity Study

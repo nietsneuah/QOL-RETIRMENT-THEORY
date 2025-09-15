@@ -1,0 +1,4 @@
+Strategy,Implementation,Phase_Rates,Trinity_Multipliers,Total_Real_Income,Final_Value_Mean,Final_Value_Median,Depletion_Rate,Success_Rate_100K
+Trinity Study (4% Rule),Fixed Real Withdrawal,Fixed 4% of initial portfolio,1.00x / 1.00x / 1.00x,"$829,120","$68,472",$0,84.6%,11.6%
+QOL Standard Strategy,Trinity Base + QOL Multipliers,"P1: 5.4%, P2: 4.5%, P3: 3.5%",1.35x / 1.12x / 0.88x,"$885,562","$41,028",$0,90.0%,7.2%
+QOL Enhanced Strategy,Trinity Base + QOL Multipliers,"P1: 7.0%, P2: 5.5%, P3: 4.0%",1.75x / 1.38x / 1.00x,"$943,895","$14,630",$0,96.9%,2.7%

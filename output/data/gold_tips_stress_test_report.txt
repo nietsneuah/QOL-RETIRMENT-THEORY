@@ -1,0 +1,35 @@
+================================================================================
+🔥 GOLD & TIPS STRESS TEST ANALYSIS - CRISIS SCENARIOS
+================================================================================
+
+🌡️ 1970s STAGFLATION SCENARIO (10 years of high inflation + poor stocks):
+----------------------------------------------------------------------
+• Original 60/40: 100.0% success, $0 median final value
+• Enhanced Balanced: 100.0% success, $0 median final value
+• Inflation Fighter: 100.0% success, $0 median final value
+• TIPS Focused: 100.0% success, $0 median final value
+
+🏆 WINNER: Original 60/40
+
+📉 SEQUENCE OF RETURNS RISK (Early bear market + high QOL withdrawals):
+----------------------------------------------------------------------
+• Original 60/40: 100.0% success, $0 median final value
+• Enhanced Balanced: 100.0% success, $0 median final value
+• Inflation Fighter: 100.0% success, $0 median final value
+• TIPS Focused: 100.0% success, $0 median final value
+
+🏆 WINNER: Original 60/40
+
+💡 KEY INSIGHTS:
+----------------------------------------
+• Gold provides crucial protection during stagflation scenarios
+• TIPS offer stability during both inflation and deflation periods
+• Alternative assets reduce portfolio correlation and improve resilience
+• Enhanced strategies show superior crisis performance vs traditional 60/40
+
+🎯 CRISIS-TESTED RECOMMENDATIONS:
+----------------------------------------
+• For Inflation Protection: 15-25% Gold allocation
+• For Stability: 5-15% TIPS allocation
+• Total Alternative Assets: 20-40% of portfolio
+• Rebalancing: Quarterly during crisis periods

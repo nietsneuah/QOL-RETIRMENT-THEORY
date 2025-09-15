@@ -232,6 +232,22 @@ print(f"Success Rate: {results['hauenstein_metrics']['success_rate']:.1%}")
 
 📖 **See [SCENARIO_GUIDE.md](SCENARIO_GUIDE.md) for comprehensive usage examples**
 
+## 🎯 Quick Asset Allocation Reference
+
+For immediate guidance on portfolio construction within the QOL framework:
+
+**Most Common Starting Point:**
+- **50% Stocks, 30% Bonds, 15% Gold, 5% TIPS** (Enhanced Moderate)
+- Suitable for ages 65-75 with moderate risk tolerance
+
+**Adjust Based on Your Situation:**
+- **More Conservative**: Reduce stocks to 30-40%, increase bonds
+- **More Aggressive**: Increase stocks to 60-70%, reduce bonds
+- **High Inflation Concern**: Increase Gold to 20-25%, TIPS to 10-15%
+- **Advanced Age (75+)**: Reduce stocks to 20-40%, increase stability assets
+
+📖 **See [Asset Allocation Guide](docs/ASSET_ALLOCATION_GUIDE.md) for complete decision framework**
+
 ### 📋 **NEW: Automated PDF Reports**
 All analysis tools now automatically generate **consolidated PDF reports**:
 ```bash
@@ -257,6 +273,8 @@ The `research/` directory contains:
 - **Academic Paper**: `Hauenstein_QOL_Framework_Anonymized.pdf` - Publication-ready research paper
 - **LaTeX Source**: `Hauenstein_QOL_Framework_Anonymized.tex` - Source for academic paper
 - **Documentation**: `Hauenstein_QOL_Framework_Anonymized.md` - Detailed framework explanation
+- **Asset Allocation Guide**: `Asset_Allocation_Decision_Framework.pdf` - Comprehensive portfolio construction guide
+- **Quick Reference**: `Asset_Allocation_Quick_Reference.pdf` - Concise allocation decision card
 
 ## Framework Components
 
@@ -276,6 +294,15 @@ def quality_of_life_factor(age):
 - **Phase 1 (65-75)**: 5.4% withdrawal rate
 - **Phase 2 (75-85)**: 4.5% withdrawal rate
 - **Phase 3 (85+)**: 3.5% withdrawal rate
+
+### 4. Asset Allocation Decision Framework
+The QOL framework includes comprehensive guidance for structuring portfolios:
+- **Individual assessment tools** for risk tolerance and circumstances
+- **Decision matrices** for different investor profiles
+- **Gold and TIPS integration analysis** for inflation protection
+- **Implementation strategies** with practical guidance
+
+📖 **See [Asset Allocation Guide](docs/ASSET_ALLOCATION_GUIDE.md) for comprehensive portfolio construction guidance**
 
 ## Key Results
 
@@ -320,7 +347,8 @@ QOL-RETIREMENT-THEORY/
 ├── docs/                             # Documentation
 │   ├── ENHANCED_FEATURES_GUIDE.md    # Comprehensive guide to enhanced features
 │   ├── PDF_REPORTING_GUIDE.md        # PDF reporting documentation
-│   └── SCENARIO_GUIDE.md             # Scenario analysis guide
+│   ├── SCENARIO_GUIDE.md             # Scenario analysis guide
+│   └── ASSET_ALLOCATION_GUIDE.md     # Asset allocation decision framework
 ├── examples/                         # Example scripts and demonstrations
 │   ├── example.py                    # Basic framework example
 │   ├── test_custom_scenarios.py      # Test scenarios
@@ -329,7 +357,9 @@ QOL-RETIREMENT-THEORY/
 ├── research/                         # Academic research materials
 │   ├── Hauenstein_QOL_Framework_Anonymized.pdf
 │   ├── Hauenstein_QOL_Framework_Anonymized.tex
-│   └── Hauenstein_QOL_Framework_Anonymized.md
+│   ├── Hauenstein_QOL_Framework_Anonymized.md
+│   ├── Asset_Allocation_Decision_Framework.pdf
+│   └── Asset_Allocation_Quick_Reference.pdf
 ├── output/                           # Generated analysis outputs (auto-created)
 │   └── README.md                     # Output directory documentation
 ├── tests/                            # Unit tests

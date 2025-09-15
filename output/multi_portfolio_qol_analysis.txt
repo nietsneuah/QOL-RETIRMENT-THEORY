@@ -1,0 +1,70 @@
+================================================================================
+🔬 MULTI-PORTFOLIO QOL SIMULATION SUMMARY
+================================================================================
+
+🏆 OPTIMAL COMBINATIONS (Moderate Enjoyment Scenario)
+------------------------------------------------------------
+
+Conservative (30/70):
+  Best QOL: QOL Enhanced
+  Cost per enjoyment $: $1.46
+  Income advantage: -0.9%
+  Risk penalty: +11.6%
+  🟢 RECOMMENDED
+
+Moderate Conservative (50/50):
+  Best QOL: QOL Enhanced
+  Cost per enjoyment $: $1.64
+  Income advantage: +0.3%
+  Risk penalty: +13.3%
+  🟢 RECOMMENDED
+
+Moderate (60/40):
+  Best QOL: QOL Conservative
+  Cost per enjoyment $: $1.27
+  Income advantage: +1.4%
+  Risk penalty: +5.9%
+  🟢 RECOMMENDED
+
+Moderate Aggressive (70/30):
+  Best QOL: QOL Conservative
+  Cost per enjoyment $: $1.14
+  Income advantage: +1.7%
+  Risk penalty: +5.3%
+  🟢 RECOMMENDED
+
+Aggressive (80/20):
+  Best QOL: QOL Conservative
+  Cost per enjoyment $: $1.06
+  Income advantage: +1.8%
+  Risk penalty: +4.9%
+  🟢 RECOMMENDED
+
+Very Aggressive (90/10):
+  Best QOL: QOL Conservative
+  Cost per enjoyment $: $0.96
+  Income advantage: +1.9%
+  Risk penalty: +4.4%
+  🟢 RECOMMENDED
+
+Ultra Aggressive (100/0):
+  Best QOL: QOL Conservative
+  Cost per enjoyment $: $0.92
+  Income advantage: +1.9%
+  Risk penalty: +4.2%
+  🟢 RECOMMENDED
+
+🎯 KEY INSIGHTS
+----------------------------------------
+• Best overall combination: Ultra Aggressive (100/0) + QOL Conservative
+  Cost: $0.92 per enjoyment dollar
+
+• Worst combination: Moderate Conservative (50/50) + QOL Conservative
+  Cost: $1.75 per enjoyment dollar
+
+• Stock allocation effect on QOL viability:
+  Correlation with cost per enjoyment $: -0.875
+  Higher stock allocation IMPROVES QOL viability
+
+• Viable QOL combinations (≤$2.00 per enjoyment $): 21/21
+• QOL viability rate: 100.0%
